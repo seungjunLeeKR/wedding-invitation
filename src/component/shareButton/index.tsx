@@ -25,11 +25,13 @@ export const ShareButton = () => {
           }
 
           kakao.Share.sendDefault({
-            // Use 'feed' objectType so we can provide multiple custom buttons
-            objectType: "feed",
+            objectType: "location",
+            address: SHARE_ADDRESS,
+            addressTitle: SHARE_ADDRESS_TITLE,
             content: {
               title: `${GROOM_FULLNAME} ❤️ ${BRIDE_FULLNAME}의 결혼식에 초대합니다.`,
-              description: WEDDING_DATE.format(WEDDING_DATE_FORMAT) + "\n" + LOCATION,
+              description:
+                WEDDING_DATE.format(WEDDING_DATE_FORMAT) + "\n" + LOCATION,
               imageUrl:
                 window.location.protocol +
                 "//" +
@@ -63,17 +65,6 @@ export const ShareButton = () => {
                     "//" +
                     window.location.host +
                     baseUrl,
-                },
-              },
-              {
-                title: "위치 보기",
-                link: {
-                  mobileWebUrl: `https://map.kakao.com/link/search/${encodeURIComponent(
-                    SHARE_ADDRESS,
-                  )}`,
-                  webUrl: `https://map.kakao.com/link/search/${encodeURIComponent(
-                    SHARE_ADDRESS,
-                  )}`,
                 },
               },
             ],
