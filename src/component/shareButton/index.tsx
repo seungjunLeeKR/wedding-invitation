@@ -2,8 +2,6 @@ import {
   BRIDE_FULLNAME,
   GROOM_FULLNAME,
   LOCATION,
-  SHARE_ADDRESS,
-  SHARE_ADDRESS_TITLE,
   WEDDING_DATE,
   WEDDING_DATE_FORMAT,
 } from "../../const"
@@ -21,50 +19,36 @@ export const ShareButton = () => {
         className="ktalk-share"
         onClick={() => {
           if (!kakao) {
+            console.log("Kakao SDK not loaded")
             return
           }
 
+          const shareUrl = window.location.protocol + "//" + window.location.host + baseUrl
+          
           kakao.Share.sendDefault({
-            objectType: "location",
-            address: SHARE_ADDRESS,
-            addressTitle: SHARE_ADDRESS_TITLE,
-            content: {
-              title: `${GROOM_FULLNAME} ❤️ ${BRIDE_FULLNAME}의 결혼식에 초대합니다.`,
-              description:
-                WEDDING_DATE.format(WEDDING_DATE_FORMAT) + "\n" + LOCATION,
-              imageUrl:
-                window.location.protocol +
-                "//" +
-                window.location.host +
-                baseUrl +
-                "/preview_image.png",
-              link: {
-                mobileWebUrl:
-                  window.location.protocol +
-                  "//" +
-                  window.location.host +
-                  baseUrl,
-                webUrl:
-                  window.location.protocol +
-                  "//" +
-                  window.location.host +
-                  baseUrl,
-              },
+            objectType: "list",
+            headerTitle: `${GROOM_FULLNAME} ❤️ ${BRIDE_FULLNAME} 결혼식`,
+            headerLink: {
+              mobileWebUrl: shareUrl,
+              webUrl: shareUrl,
             },
+            contents: [
+              {
+                title: "청첩장",
+                description: WEDDING_DATE.format(WEDDING_DATE_FORMAT) + "\n" + LOCATION,
+                imageUrl: shareUrl + "/preview_image.png",
+                link: {
+                  mobileWebUrl: shareUrl,
+                  webUrl: shareUrl,
+                },
+              },
+            ],
             buttons: [
               {
                 title: "초대장 보기",
                 link: {
-                  mobileWebUrl:
-                    window.location.protocol +
-                    "//" +
-                    window.location.host +
-                    baseUrl,
-                  webUrl:
-                    window.location.protocol +
-                    "//" +
-                    window.location.host +
-                    baseUrl,
+                  mobileWebUrl: shareUrl,
+                  webUrl: shareUrl,
                 },
               },
             ],
