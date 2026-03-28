@@ -25,26 +25,22 @@ export const ShareButton = () => {
 
           const shareUrl = window.location.protocol + "//" + window.location.host + baseUrl
           
-          kakao.Share.sendDefault({
-            objectType: "commerce",
-            content: {
-              title: `${GROOM_FULLNAME} ❤️ ${BRIDE_FULLNAME}의 결혼식에 초대합니다.`,
-              description: WEDDING_DATE.format(WEDDING_DATE_FORMAT) + "\n" + LOCATION,
-              imageUrl: shareUrl + "/preview_image.png",
-              link: {
-                mobileWebUrl: shareUrl,
-                webUrl: shareUrl,
-              },
+          kakao.Share.sendScrap({
+            requestUrl: shareUrl,
+            templateId: 112223,
+            templateArgs: {
+              title: `${GROOM_FULLNAME} ❤️ ${BRIDE_FULLNAME}의 결혼식`,
+              description: WEDDING_DATE.format(WEDDING_DATE_FORMAT) + " / " + LOCATION,
             },
-            buttons: [
-              {
-                title: "초대장 보기",
-                link: {
-                  mobileWebUrl: shareUrl,
-                  webUrl: shareUrl,
-                },
-              },
-            ],
+            successCallback: (response) => {
+              console.log("공유 성공", response)
+            },
+            failCallback: (error) => {
+              console.log("공유 실패", error)
+              // 실패 시 URL 복사
+              navigator.clipboard.writeText(shareUrl)
+              alert("공유 링크가 복사되었습니다.\n" + shareUrl)
+            },
           })
         }}
       >
