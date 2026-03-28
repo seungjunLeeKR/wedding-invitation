@@ -26,9 +26,12 @@ export const ShareButton = () => {
           console.log("Base URL 설정값:", baseUrl);
 
           try {
-            kakao.Share.sendScrap({
-              requestUrl: shareUrl, 
-            });
+            if (kakao.Share && kakao.Share.sendScrap) {
+                kakao.Share.sendScrap({
+                  requestUrl: shareUrl,
+                  templateId: 131174, // 수정하신 템플릿 ID를 반드시 넣어줘야 합니다.
+                });
+              }
           } catch (error) {
             console.error("공유 중 오류:", error)
             navigator.clipboard.writeText(shareUrl)
