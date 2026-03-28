@@ -35,7 +35,16 @@ export const ShareButton = () => {
             contents: [
               {
                 title: "청첩장",
-                description: WEDDING_DATE.format(WEDDING_DATE_FORMAT) + "\n" + LOCATION,
+                description: WEDDING_DATE.format(WEDDING_DATE_FORMAT),
+                imageUrl: shareUrl + "/preview_image.png",
+                link: {
+                  mobileWebUrl: shareUrl,
+                  webUrl: shareUrl,
+                },
+              },
+              {
+                title: "예식 장소",
+                description: LOCATION,
                 imageUrl: shareUrl + "/preview_image.png",
                 link: {
                   mobileWebUrl: shareUrl,
