@@ -36,22 +36,11 @@ export const ShareButton = () => {
                 webUrl: shareUrl,
               },
             },
-            buttons: [
-              {
-                title: "초대장 보기",
-                link: {
-                  mobileWebUrl: shareUrl,
-                  webUrl: shareUrl,
-                },
-              },
-              {
-                title: "공유하기",
-                link: {
-                  mobileWebUrl: shareUrl,
-                  webUrl: shareUrl,
-                },
-              },
-            ],
+            buttonTitle: "초대장 보기",
+            buttonLink: {
+              mobileWebUrl: shareUrl,
+              webUrl: shareUrl,
+            },
           })
         }}
       >
